@@ -13,8 +13,6 @@ MomentArms=[3.4 0 0; ... iliacus
 
 % Maximum isometric forces. Same order as the moment arms
 Fiso=[1073; 1169; 804; 1288; 1000; 1871; 1294; 683; 3549; 905];
-% Fiso(6)=Fiso(6)*0.5;
-% Fiso(7)=Fiso(7)*0.5;
 
 % Given moments at the hip, knee and ankle
 M=[-60; 80; -100];
@@ -38,7 +36,7 @@ b=[];
 Aeq=(MomentArms').*Fiso'; %note that x is a vector of 10 rows, so 
     % MomentArms variable needs to be transposed
 beq=M;
-%muscle activations are bound between 0 (lower bound - lb) and 1 (upper
+%muscle activations are bounded between 0 (lower bound - lb) and 1 (upper
 %bound - 1)
 lb=zeros(nmuscles,1);
 ub=ones(nmuscles,1);
@@ -57,6 +55,7 @@ bar(sol);
 set(gca,'XTick',[1:10],'XTickLabels', muscle_labels);
 ylabel('muscle activations []');
 title('Muscle activations');
+set(gcf,'Position',[1,297,559.3,344]);
 
 %% Plot muscle forces
 figure
@@ -65,11 +64,13 @@ bar(sol.*Fiso);
 set(gca,'XTick',[1:10],'XTickLabels', muscle_labels);
 ylabel('muscle forces []');
 title('Muscle forces');
+set(gcf,'Position',[667,295,612,343.3]);
 
 %% Resultant joint moments
 figure
 joint_moments={'hip','knee','ankle'};
 bar(Moment_sol);
-set(gca,'XTick',[1:10],'XTickLabels', joint_moments);
+set(gca,'XTick',[1:3],'XTickLabels', joint_moments);
 ylabel('Joint Moments [Nm]');
 title('Joint moments');
+set(gcf,'Position',[386.3,42.3,434.7,294.7]);
